@@ -1,5 +1,16 @@
 FROM alpine
-MAINTAINER saman-taghavi
+LABEL maintainer="saman-taghavi"
+
+ARG SITE
+ARG SAMPLES
+ARG THROTTLE
+ARG DEBUG
+ARG DESKTOP
+ARG MOBILE
+ARG ENABLE_JS
+ARG EXCLUDE_URLS
+ARG CACHE
+ARG CAPROVER_GIT_COMMIT_SHA
 
 RUN apk add --no-cache \
     chromium \
