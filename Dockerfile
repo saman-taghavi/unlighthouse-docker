@@ -10,11 +10,12 @@ ENV SITE="http://otaghak.com" \
     MOBILE="false" \
     ENABLE_JS="false" \
     THROTTLE="true" \
-    DEBUG="false"
+    DEBUG="true"
 
 EXPOSE 80
-CMD ["sh", "-c", "\
-    args='--site $SITE --urls $URLS --output-path $OUTPUT_PATH --samples $SAMPLES --exclude-urls $EXCLUDE_URLS'; \
+
+CMD ["sh", "-ec", "\
+    args=\"--site $SITE --urls $URLS --output-path $OUTPUT_PATH --samples $SAMPLES --exclude-urls $EXCLUDE_URLS\"; \
     [ \"$DESKTOP\" = \"true\" ] && args=\"$args --desktop\"; \
     [ \"$MOBILE\" = \"true\" ] && args=\"$args --mobile\"; \
     [ \"$ENABLE_JS\" = \"true\" ] && args=\"$args --enable-javascript\"; \
@@ -22,7 +23,7 @@ CMD ["sh", "-c", "\
     [ \"$DEBUG\" = \"true\" ] && args=\"$args -d\"; \
     args=\"$args --build-static\"; \
     echo \"Running unlighthouse-ci with args: $args\"; \
-    unlighthouse-ci $args; \
+    unlighthouse-ci $args ; \
     echo \"Starting static server at $OUTPUT_PATH on port 80\"; \
-    npx sirv-cli $OUTPUT_PATH -p 80; \
+    npx sirv-cli $OUTPUT_PATH -p 80 \
     "]
