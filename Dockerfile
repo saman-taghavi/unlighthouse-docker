@@ -33,4 +33,6 @@ WORKDIR /home/unlighthouse
 
 ADD unlighthouse.config.ts unlighthouse.config.ts 
 
-ENTRYPOINT ["sh", "-c", "npx unlighthouse --site $SITE $@"]
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
