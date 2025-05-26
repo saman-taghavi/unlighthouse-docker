@@ -26,18 +26,16 @@ RUN addgroup -S unlighthouse && adduser -S -G unlighthouse unlighthouse \
     && chown -R unlighthouse:unlighthouse /home/unlighthouse \
     && chown -R unlighthouse:unlighthouse /app
 
+# Add the entrypoint script
+ADD entrypoint.sh entrypoint.sh 
+# Make it executable
+RUN chmod +x entrypoint.sh
+
 # Run everything after as non-privileged user.
 USER unlighthouse
 WORKDIR /home/unlighthouse
 
 ADD unlighthouse.config.ts unlighthouse.config.ts 
-# Add the entrypoint script
-ADD entrypoint.sh entrypoint.sh 
-
-RUN ls -a
-
-# Make it executable
-RUN chmod +x entrypoint.sh
 
 # Use it as entrypoint
 ENTRYPOINT ["entrypoint.sh"]
