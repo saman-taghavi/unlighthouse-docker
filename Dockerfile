@@ -1,13 +1,13 @@
 FROM alpine
-MAINTAINER IndyKoning
+MAINTAINER saman-taghavi
 
 RUN apk add --no-cache \
-      chromium \
-      nss \
-      freetype \
-      harfbuzz \
-      ca-certificates \
-      ttf-freefont
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
 
 RUN apk add nodejs npm yarn; \
     npm install -g unlighthouse
@@ -33,4 +33,4 @@ WORKDIR /home/unlighthouse
 
 ADD unlighthouse.config.ts unlighthouse.config.ts 
 
-ENTRYPOINT npx unlighthouse --site ${SITE}
+ENTRYPOINT ["sh", "-c", "npx unlighthouse --site $SITE $@"]

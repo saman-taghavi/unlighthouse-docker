@@ -3,7 +3,7 @@ services:
   unlighthouse:
     container_name: unlighthouse
     # build: .
-    image: ghcr.io/indykoning/unlighthouse-docker:master
+    image: ghcr.io/saman-taghavi/unlighthouse-docker:master
     environment:
       - SITE=http://localhost
     ports:
