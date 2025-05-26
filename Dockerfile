@@ -1,16 +1,36 @@
 FROM ghcr.io/indykoning/unlighthouse-docker
 LABEL maintainer="saman-taghavi"
 
-ENV SITE="http://otaghak.com" \
-    URLS="/host" \
-    OUTPUT_PATH="./desktop-report" \
-    SAMPLES=1 \
-    EXCLUDE_URLS="/blog,/blog/*" \
-    DESKTOP="true" \
-    MOBILE="false" \
-    ENABLE_JS="false" \
-    THROTTLE="true" \
-    DEBUG="true"
+# Build-time ARGs (can be overridden via --build-arg), fallback to CapRover runtime ENV
+ARG SITE=http://localhost
+ENV SITE=${SITE}
+
+ARG URLS=/host
+ENV URLS=${URLS}
+
+ARG OUTPUT_PATH=./desktop-report
+ENV OUTPUT_PATH=${OUTPUT_PATH}
+
+ARG SAMPLES=1
+ENV SAMPLES=${SAMPLES}
+
+ARG EXCLUDE_URLS=/blog,/blog/*
+ENV EXCLUDE_URLS=${EXCLUDE_URLS}
+
+ARG DESKTOP=true
+ENV DESKTOP=${DESKTOP}
+
+ARG MOBILE=false
+ENV MOBILE=${MOBILE}
+
+ARG ENABLE_JS=false
+ENV ENABLE_JS=${ENABLE_JS}
+
+ARG THROTTLE=true
+ENV THROTTLE=${THROTTLE}
+
+ARG DEBUG=false
+ENV DEBUG=${DEBUG}
 
 EXPOSE 80
 
