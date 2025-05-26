@@ -31,7 +31,13 @@ USER unlighthouse
 WORKDIR /home/unlighthouse
 
 ADD unlighthouse.config.ts unlighthouse.config.ts 
+# Add the entrypoint script
+ADD entrypoint.sh entrypoint.sh 
 
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+RUN ls -a
+
+# Make it executable
+RUN chmod +x entrypoint.sh
+
+# Use it as entrypoint
+ENTRYPOINT ["entrypoint.sh"]
